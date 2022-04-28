@@ -1,51 +1,51 @@
-# Kratos Project Template
+# 目录结构
 
-## Install Kratos
-```
-go install github.com/go-kratos/kratos/cmd/kratos/v2@latest
-```
-## Create a service
-```
-# Create a template project
-kratos new server
+## api
 
-cd server
-# Add a proto template
-kratos proto add api/server/server.proto
-# Generate the proto code
-kratos proto client api/server/server.proto
-# Generate the source code of service by proto file
-kratos proto server api/server/server.proto -t internal/service
+存放proto文件
 
-go generate ./...
-go build -o ./bin/ ./...
-./bin/server -conf ./configs
-```
-## Generate other auxiliary files by Makefile
-```
-# Download and update dependencies
-make init
-# Generate API files (include: pb.go, http, grpc, validate, swagger) by proto file
-make api
-# Generate all files
-make all
-```
-## Automated Initialization (wire)
-```
-# install wire
-go get github.com/google/wire/cmd/wire
+## cmd
 
-# generate wire
-cd cmd/server
-wire
-```
+存放初始化项目脚本
 
-## Docker
-```bash
-# build
-docker build -t <your-docker-image-name> .
+## configs
 
-# run
-docker run --rm -p 8000:8000 -p 9000:9000 -v </path/to/your/configs>:/data/conf <your-docker-image-name>
-```
+存放配置文件
 
+## internal
+
+存放项目私有文件，不可被引用
+
+### internal/user
+
+用户模块（服务）
+
+#### internal/user/service
+
+类比ddd的application层，协同各类biz的交互
+
+#### internal/user/biz
+
+类比ddd的domain层，处理主要的业务逻辑
+
+在该层定义实现实体的接口，再由data层去实现对应的接口
+
+#### internal/user/data
+
+类比ddd的repo层，最终由该层来请求数据
+
+### internal/merchant
+
+商户模块（服务）
+
+### internal/pkg
+
+存放多模块（服务）共享数据，比如数据库，消息队列的连接等
+
+### internal/conf
+
+存放多模块（服务）共享配置结构
+
+## third_party
+
+第三方包
