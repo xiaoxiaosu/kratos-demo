@@ -1,0 +1,85 @@
+syntax = "proto3";
+
+package api.merchant;
+
+import "google/api/annotations.proto";
+
+option go_package = "demo/api/merchant;merchant";
+option java_multiple_files = true;
+option java_package = "api.merchant";
+
+service Merchant {
+	rpc CreateMerchant (CreateMerchantRequest) returns (CreateMerchantReply) {
+		option (google.api.http) = {
+			post: "/merchant",
+			body: "*"
+		};
+	};
+	rpc UpdateMerchant (UpdateMerchantRequest) returns (UpdateMerchantReply) {
+		option (google.api.http) = {
+			put: "/merchant/{id}",
+			body: "*"
+		};
+	};
+	rpc DeleteMerchant (DeleteMerchantRequest) returns (DeleteMerchantReply) {
+		option (google.api.http) = {
+			delete: "/merchant/{id}",
+		};
+	};
+	rpc GetMerchant (GetMerchantRequest) returns (GetMerchantReply) {
+		option (google.api.http) = {
+			get: "/merchant/{id}",
+		};
+	};
+	rpc ListMerchant (ListMerchantRequest) returns (ListMerchantReply) {
+		option (google.api.http) = {
+			get: "/merchant",
+		};
+	};
+}
+
+message CreateMerchantRequest {
+	string userName = 1;
+}
+message CreateMerchantReply {
+	uint32 code = 1;
+	string message = 2;
+}
+
+message UpdateMerchantRequest {
+	uint32 id = 1;
+	string name = 2;
+}
+message UpdateMerchantReply {
+	uint32 code = 1;
+	string message = 2;
+}
+
+message DeleteMerchantRequest {
+	uint32 id = 1;
+}
+message DeleteMerchantReply {
+	uint32 code = 1;
+	string message = 2;
+}
+
+message GetMerchantRequest {
+	uint32 id = 1;
+}
+
+message merchant {
+	string name = 1;
+}
+
+message GetMerchantReply {
+	uint32 code = 1;
+	string message = 2;
+	merchant merchant = 3;
+}
+
+message ListMerchantRequest {}
+message ListMerchantReply {
+	uint32 code = 1;
+	string message = 2;
+	repeated merchant merchant = 3;
+}
