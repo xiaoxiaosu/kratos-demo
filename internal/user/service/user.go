@@ -23,3 +23,8 @@ func (u *UserService) CreateMerchant(ctx context.Context, in *pb.CreateUserReque
 
 	return reply, nil
 }
+
+func (m *UserService) ListUser(ctx context.Context, in *pb.GetUserRequest) (*pb.GetUserReply, error) {
+
+	return nil, nil
+}

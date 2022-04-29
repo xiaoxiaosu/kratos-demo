@@ -2,9 +2,11 @@ package main
 
 import (
 	"demo/api/merchant"
+	"demo/api/user"
 	"demo/internal/conf"
 	ms "demo/internal/merchant/service"
 	"demo/internal/pkg"
+	us "demo/internal/user/service"
 	"github.com/go-kratos/kratos/v2"
 	"github.com/go-kratos/kratos/v2/config"
 	"github.com/go-kratos/kratos/v2/config/file"
@@ -47,6 +49,7 @@ func main() {
 
 	//注册服务
 	merchant.RegisterMerchantHTTPServer(hs, ms.NewMerchantService(data))
+	user.RegisterUserHTTPServer(hs, us.NewUserService(data))
 
 	// 实例化应用
 	app := kratos.New(
