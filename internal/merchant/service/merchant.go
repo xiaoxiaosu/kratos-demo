@@ -23,3 +23,14 @@ func (m *MerchantService) CreateMerchant(ctx context.Context, in *pb.CreateMerch
 
 	return reply, nil
 }
+
+func (m *MerchantService) ListMerchant(ctx context.Context, in *pb.ListMerchantRequest) (*pb.ListMerchantReply, error) {
+	merchants := []*pb.Merchant{}
+
+	merchants = append(merchants, &pb.Merchant{Name: "test1"})
+	merchants = append(merchants, &pb.Merchant{Name: "test2"})
+
+	reply := &pb.ListMerchantReply{Merchant: merchants}
+
+	return reply, nil
+}
