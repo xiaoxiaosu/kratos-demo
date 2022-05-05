@@ -8,19 +8,19 @@ package main
 
 import (
 	"demo/internal/conf"
-	"demo/internal/merchant/biz"
-	data2 "demo/internal/merchant/data"
-	"demo/internal/merchant/service"
+	merchantBiz "demo/internal/merchant/biz"
+	merchantData "demo/internal/merchant/data"
+	merchantService "demo/internal/merchant/service"
 	"demo/internal/pkg/data"
 	"demo/internal/pkg/server"
-	biz2 "demo/internal/user/biz"
-	data3 "demo/internal/user/data"
-	service2 "demo/internal/user/service"
+	userBiz "demo/internal/user/biz"
+	userData "demo/internal/user/data"
+	userService "demo/internal/user/service"
 	"github.com/go-kratos/kratos/v2"
 )
 
 // Injectors from wire.go:
-
+// 依赖注入
 func wireApp(confServer *conf.Server, confData *conf.Data) (*kratos.App, func(), error) {
 	db, err := data.NewDb(confData)
 	if err != nil {
@@ -34,14 +34,14 @@ func wireApp(confServer *conf.Server, confData *conf.Data) (*kratos.App, func(),
 	if err != nil {
 		return nil, nil, err
 	}
-	merchantRepo := data2.NewMerchantRepo(dataData)
-	merchantUseCase := biz.NewMerchantUseCase(merchantRepo)
-	businessLineRepo := data2.NewBusinessLineRepo(dataData)
-	businessLineUseCase := biz.NewBusinessLineUseCase(businessLineRepo)
-	merchantService := service.NewMerchantService(merchantUseCase, businessLineUseCase)
-	userRepo := data3.NewUserRepo(dataData)
-	userUseCase := biz2.NewUserUseCase(userRepo)
-	userService := service2.NewUserService(userUseCase)
+	merchantRepo := merchantData.NewMerchantRepo(dataData)
+	merchantUseCase := merchantBiz.NewMerchantUseCase(merchantRepo)
+	businessLineRepo := merchantData.NewBusinessLineRepo(dataData)
+	businessLineUseCase := merchantBiz.NewBusinessLineUseCase(businessLineRepo)
+	merchantService := merchantService.NewMerchantService(merchantUseCase, businessLineUseCase)
+	userRepo := userData.NewUserRepo(dataData)
+	userUseCase := userBiz.NewUserUseCase(userRepo)
+	userService := userService.NewUserService(userUseCase)
 	httpServer := server.NewHTTPServer(confServer, merchantService, userService)
 	grpcServer := server.NewGRPCServer(confServer, merchantService, userService)
 	app := newApp(httpServer, grpcServer)
