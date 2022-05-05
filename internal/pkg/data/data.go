@@ -1,11 +1,13 @@
-package pkg
+package data
 
 import (
 	"context"
 	"database/sql"
 	"demo/internal/conf"
+	"github.com/go-kratos/kratos/v2/log"
 	"github.com/go-redis/redis/v8"
 	_ "github.com/go-sql-driver/mysql"
+	"github.com/google/wire"
 	"time"
 )
 
@@ -14,8 +16,10 @@ type Data struct {
 	RedisCli redis.Cmdable
 }
 
+var ProviderSet = wire.NewSet(NewData, NewDb, NewRedisCli)
+
 // 创建数据库连接
-func newDb(conf *conf.Data) (*sql.DB, error) {
+func NewDb(conf *conf.Data) (*sql.DB, error) {
 	db, err := sql.Open(conf.Database.Driver, conf.Database.Source)
 	if err != nil {
 		return nil, err
@@ -29,7 +33,7 @@ func newDb(conf *conf.Data) (*sql.DB, error) {
 }
 
 // 连接redis
-func newRedisCli(conf *conf.Data) (redis.Cmdable, error) {
+func NewRedisCli(conf *conf.Data) (redis.Cmdable, error) {
 	client := redis.NewClient(&redis.Options{
 		Addr:        conf.Redis.Addr,
 		DialTimeout: time.Second * 2,
@@ -45,19 +49,15 @@ func newRedisCli(conf *conf.Data) (redis.Cmdable, error) {
 	return client, nil
 }
 
-func NewData(conf *conf.Data) (*Data, error) {
-	data := &Data{}
-	if db, err := newDb(conf); err != nil {
-		return data, err
-	} else {
-		data.Db = db
+func NewData(dbClient *sql.DB, redisCmd redis.Cmdable) (*Data, func(), error) {
+	data := &Data{
+		Db:       dbClient,
+		RedisCli: redisCmd,
 	}
 
-	if redisCli, err := newRedisCli(conf); err != nil {
-		return data, err
-	} else {
-		data.RedisCli = redisCli
-	}
-
-	return data, nil
+	return data, func() {
+		if err := data.Db.Close(); err != nil {
+			log.Error(err)
+		}
+	}, nil
 }

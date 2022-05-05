@@ -2,23 +2,23 @@ package data
 
 import (
 	"context"
-	"demo/internal/pkg"
+	"demo/internal/pkg/data"
 
 	"demo/internal/user/biz"
 )
 
 type UserRepo struct {
-	data *pkg.Data
+	data *data.Data
 }
 
-func NewUserRepo(data *pkg.Data) biz.UserRepo {
+func NewUserRepo(data *data.Data) biz.UserRepo {
 	return &UserRepo{
 		data: data,
 	}
 }
 
-func (m *UserRepo) Save(ctx context.Context, user *biz.User) (bool, error) {
-	m.data.Db.Exec("")
+func (u *UserRepo) Save(ctx context.Context, user *biz.User) (bool, error) {
+	u.data.Db.Exec("")
 	return false, nil
 }
 

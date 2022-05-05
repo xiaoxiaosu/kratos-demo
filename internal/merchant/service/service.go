@@ -3,8 +3,7 @@ package service
 import (
 	"demo/api/merchant"
 	"demo/internal/merchant/biz"
-	"demo/internal/merchant/data"
-	"demo/internal/pkg"
+	"github.com/google/wire"
 )
 
 type MerchantService struct {
@@ -14,15 +13,12 @@ type MerchantService struct {
 	bc *biz.BusinessLineUseCase
 }
 
-func NewMerchantService(d *pkg.Data) *MerchantService {
-	merchantRepo := data.NewMerchantRepo(d)
-	merchantUseCase := biz.NewMerchantUseCase(merchantRepo)
+var ProviderSet = wire.NewSet(NewMerchantService)
 
-	businessLineRepo := data.NewBusinessLineRepo(d)
-	businessLineUseCase := biz.NewBusinessLineUseCase(businessLineRepo)
+func NewMerchantService(mc *biz.MerchantUseCase, bc *biz.BusinessLineUseCase) *MerchantService {
 
 	return &MerchantService{
-		mc: merchantUseCase,
-		bc: businessLineUseCase,
+		mc: mc,
+		bc: bc,
 	}
 }

@@ -1,34 +1,48 @@
 package main
 
 import (
-	"demo/api/merchant"
-	"demo/api/user"
 	"demo/internal/conf"
-	ms "demo/internal/merchant/service"
-	"demo/internal/pkg"
-	us "demo/internal/user/service"
 	"github.com/go-kratos/kratos/v2"
 	"github.com/go-kratos/kratos/v2/config"
 	"github.com/go-kratos/kratos/v2/config/file"
+	"github.com/go-kratos/kratos/v2/transport/grpc"
 	"github.com/go-kratos/kratos/v2/transport/http"
 )
 
+var (
+	appConf    conf.App
+	dataConf   conf.Data
+	serverConf conf.Server
+)
+
+func newApp(hs *http.Server, gs *grpc.Server) *kratos.App {
+	return kratos.New(
+		kratos.Name(appConf.Name),
+		kratos.Metadata(map[string]string{}),
+		kratos.Server(
+			hs,
+			gs,
+		),
+	)
+}
+
 func main() {
+
 	// 初始化配置
 	c := config.New(
 		config.WithSource(
 			file.NewSource("../../configs/config.yaml"),
 		),
 	)
+	defer c.Close()
+
 	if err := c.Load(); err != nil {
 		panic(err)
 	}
 
-	var appConf conf.App
 	if err := c.Value("app").Scan(&appConf); err != nil {
 		panic(err)
 	}
-	var dataConf conf.Data
 	if err := c.Value("data").Scan(&dataConf); err != nil {
 		panic(err)
 	}
@@ -38,24 +52,13 @@ func main() {
 		panic(err)
 	}
 
-	// 初始化数据库
-	data, err := pkg.NewData(&dataConf)
+	app, cleanup, err := wireApp(&serverConf, &dataConf)
 	if err != nil {
 		panic(err)
 	}
+	defer cleanup()
 
-	// 创建http服务器
-	hs := http.NewServer(http.Address(serverConf.Http.Addr))
-
-	//注册服务
-	merchant.RegisterMerchantHTTPServer(hs, ms.NewMerchantService(data))
-	user.RegisterUserHTTPServer(hs, us.NewUserService(data))
-
-	// 实例化应用
-	app := kratos.New(
-		kratos.Name(appConf.Name),
-		kratos.Server(hs),
-	)
-
-	app.Run()
+	if err = app.Run(); err != nil {
+		panic(err)
+	}
 }

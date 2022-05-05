@@ -2,10 +2,11 @@ package service
 
 import (
 	"demo/api/user"
-	"demo/internal/pkg"
 	"demo/internal/user/biz"
-	"demo/internal/user/data"
+	"github.com/google/wire"
 )
+
+var ProviderSet = wire.NewSet(NewUserService)
 
 type UserService struct {
 	user.UnimplementedUserServer
@@ -13,11 +14,9 @@ type UserService struct {
 	uc *biz.UserUseCase
 }
 
-func NewUserService(d *pkg.Data) *UserService {
-	UserRepo := data.NewUserRepo(d)
-	UserUseCase := biz.NewUserUseCase(UserRepo)
+func NewUserService(uc *biz.UserUseCase) *UserService {
 
 	return &UserService{
-		uc: UserUseCase,
+		uc: uc,
 	}
 }

@@ -3,14 +3,14 @@ package data
 import (
 	"context"
 	"demo/internal/merchant/biz"
-	"demo/internal/pkg"
+	"demo/internal/pkg/data"
 )
 
 type BusinessLineRepo struct {
-	data *pkg.Data
+	data *data.Data
 }
 
-func NewBusinessLineRepo(data *pkg.Data) biz.BusinessLineRepo {
+func NewBusinessLineRepo(data *data.Data) biz.BusinessLineRepo {
 	return &BusinessLineRepo{
 		data: data,
 	}

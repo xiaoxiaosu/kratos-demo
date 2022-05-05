@@ -39,7 +39,7 @@ service Merchant {
 }
 
 message CreateMerchantRequest {
-	string userName = 1;
+	string name = 1;
 }
 message CreateMerchantReply {
 	uint32 code = 1;
