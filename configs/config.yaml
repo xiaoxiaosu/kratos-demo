@@ -13,3 +13,9 @@ data:
     source: root:password@tcp(127.0.0.1:3306)/test
   redis:
     addr: 127.0.0.1:6379
+task:
+  broker: amqp://guest:guest@localhost:5672
+  queue: tasks
+  resultBackend: amqp://guest:guest@localhost:5672
+  exchange: tasks
+  exchangeType: direct

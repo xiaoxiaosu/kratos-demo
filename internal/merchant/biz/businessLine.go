@@ -21,6 +21,7 @@ type BusinessLineUseCase struct {
 }
 
 func NewBusinessLineUseCase(repo BusinessLineRepo) *BusinessLineUseCase {
+
 	return &BusinessLineUseCase{repo: repo}
 }
 

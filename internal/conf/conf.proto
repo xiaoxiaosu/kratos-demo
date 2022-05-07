@@ -36,3 +36,12 @@ message Data {
   Database database = 1;
   Redis redis = 2;
 }
+
+message Task {
+  string broker = 1;
+  string queue = 2;
+  string resultBackend = 3;
+  string exchange = 4;
+  string exchangeType = 5;
+}
+

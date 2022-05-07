@@ -8,6 +8,7 @@ import (
 )
 
 func (m *MerchantService) CreateMerchant(ctx context.Context, in *pb.CreateMerchantRequest) (*pb.CreateMerchantReply, error) {
+
 	// 定义返回值
 	reply := &pb.CreateMerchantReply{
 		Code:    0,
