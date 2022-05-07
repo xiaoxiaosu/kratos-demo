@@ -1,11 +1,11 @@
 package server
 
 import (
-	merchantProto "demo/api/merchant"
-	userProto "demo/api/user"
-	"demo/internal/conf"
-	merchantService "demo/internal/merchant/service"
-	userService "demo/internal/user/service"
+	merchantProto "common/api/merchant"
+	userProto "common/api/user"
+	"common/internal/conf"
+	merchantService "common/internal/merchant/service"
+	userService "common/internal/user/service"
 	"github.com/go-kratos/kratos/v2/middleware/recovery"
 	"github.com/go-kratos/kratos/v2/transport/http"
 )

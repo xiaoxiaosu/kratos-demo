@@ -1,10 +1,10 @@
 package data
 
 import (
+	"common/internal/pkg/data"
 	"context"
-	"demo/internal/pkg/data"
 
-	"demo/internal/user/biz"
+	"common/internal/user/biz"
 )
 
 type UserRepo struct {

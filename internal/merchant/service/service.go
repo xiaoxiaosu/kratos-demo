@@ -1,8 +1,8 @@
 package service
 
 import (
-	"demo/api/merchant"
-	"demo/internal/merchant/biz"
+	"common/api/merchant"
+	"common/internal/merchant/biz"
 	"github.com/google/wire"
 )
 

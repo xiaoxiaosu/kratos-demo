@@ -1,8 +1,8 @@
 package main
 
 import (
-	"demo/internal/conf"
-	"demo/internal/pkg/task"
+	"common/internal/conf"
+	"common/internal/pkg/task"
 	"github.com/RichardKnop/machinery/v1"
 	"github.com/go-kratos/kratos/v2/config"
 	"github.com/go-kratos/kratos/v2/config/file"

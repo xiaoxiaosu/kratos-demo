@@ -1,10 +1,10 @@
 package data
 
 import (
+	"common/internal/pkg/data"
 	"context"
-	"demo/internal/pkg/data"
 
-	"demo/internal/merchant/biz"
+	"common/internal/merchant/biz"
 )
 
 type MerchantRepo struct {

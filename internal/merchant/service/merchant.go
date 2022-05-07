@@ -1,9 +1,9 @@
 package service
 
 import (
+	pb "common/api/merchant"
+	"common/internal/merchant/biz"
 	"context"
-	pb "demo/api/merchant"
-	"demo/internal/merchant/biz"
 	"net/http"
 )
 

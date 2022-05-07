@@ -1,9 +1,9 @@
 package data
 
 import (
+	"common/internal/conf"
 	"context"
 	"database/sql"
-	"demo/internal/conf"
 	"github.com/go-kratos/kratos/v2/log"
 	"github.com/go-redis/redis/v8"
 	_ "github.com/go-sql-driver/mysql"

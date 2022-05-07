@@ -1,7 +1,7 @@
 package main
 
 import (
-	"demo/internal/conf"
+	"common/internal/conf"
 	"github.com/go-kratos/kratos/v2"
 	"github.com/go-kratos/kratos/v2/config"
 	"github.com/go-kratos/kratos/v2/config/file"

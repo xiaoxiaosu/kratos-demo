@@ -1,9 +1,9 @@
 package data
 
 import (
+	"common/internal/merchant/biz"
+	"common/internal/pkg/data"
 	"context"
-	"demo/internal/merchant/biz"
-	"demo/internal/pkg/data"
 )
 
 type BusinessLineRepo struct {

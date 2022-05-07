@@ -4,7 +4,7 @@ package api.merchant;
 
 import "google/api/annotations.proto";
 
-option go_package = "demo/api/merchant;merchant";
+option go_package = "common/api/merchant;merchant";
 option java_multiple_files = true;
 option java_package = "api.merchant";
 

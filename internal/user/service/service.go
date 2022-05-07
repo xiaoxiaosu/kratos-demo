@@ -1,8 +1,8 @@
 package service
 
 import (
-	"demo/api/user"
-	"demo/internal/user/biz"
+	"common/api/user"
+	"common/internal/user/biz"
 	"github.com/google/wire"
 )
 

@@ -1,16 +1,16 @@
 package main
 
 import (
-	"demo/internal/conf"
-	merchantBiz "demo/internal/merchant/biz"
-	merchantData "demo/internal/merchant/data"
-	merchantService "demo/internal/merchant/service"
-	userBiz "demo/internal/user/biz"
-	userData "demo/internal/user/data"
-	userService "demo/internal/user/service"
+	"common/internal/conf"
+	merchantBiz "common/internal/merchant/biz"
+	merchantData "common/internal/merchant/data"
+	merchantService "common/internal/merchant/service"
+	userBiz "common/internal/user/biz"
+	userData "common/internal/user/data"
+	userService "common/internal/user/service"
 
-	"demo/internal/pkg/data"
-	"demo/internal/pkg/server"
+	"common/internal/pkg/data"
+	"common/internal/pkg/server"
 	"github.com/go-kratos/kratos/v2"
 	"github.com/google/wire"
 )

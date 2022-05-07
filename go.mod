@@ -1,4 +1,4 @@
-module demo
+module common
 
 go 1.17
 

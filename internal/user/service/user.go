@@ -1,9 +1,9 @@
 package service
 
 import (
+	pb "common/api/user"
+	"common/internal/user/biz"
 	"context"
-	pb "demo/api/user"
-	"demo/internal/user/biz"
 	"net/http"
 )
 

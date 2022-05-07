@@ -4,7 +4,7 @@ package api.user;
 
 import "google/api/annotations.proto";
 
-option go_package = "demo/api/user;user";
+option go_package = "common/api/user;user";
 
 
 service User {

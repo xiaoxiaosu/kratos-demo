@@ -1,7 +1,7 @@
 package task
 
 import (
-	"demo/internal/conf"
+	"common/internal/conf"
 	"github.com/RichardKnop/machinery/v1"
 	"github.com/RichardKnop/machinery/v1/backends/result"
 	"github.com/RichardKnop/machinery/v1/config"
