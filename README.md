@@ -7,62 +7,73 @@
 ├── Makefile
 ├── README.md
 ├── api
-│   ├── merchant
-│   │   ├── merchant.pb.go
-│   │   ├── merchant.proto
-│   │   ├── merchant_grpc.pb.go
-│   │   └── merchant_http.pb.go
-│   └── user
-│       ├── user.pb.go
-│       ├── user.proto
-│       ├── user_grpc.pb.go
-│       └── user_http.pb.go
+│   ├── merchant
+│   │   ├── merchant.pb.go
+│   │   ├── merchant.proto
+│   │   ├── merchant_grpc.pb.go
+│   │   └── merchant_http.pb.go
+│   └── user
+│       ├── user.pb.go
+│       ├── user.proto
+│       ├── user_grpc.pb.go
+│       └── user_http.pb.go
 ├── cmd
-│   └── admin
-│       └── main.go
+│   └── admin
+│       ├── main.go
+│       ├── wire.go
+│       └── wire_gen.go
 ├── configs
-│   └── config.yaml
+│   └── config.yaml
 ├── go.mod
 ├── go.sum
 ├── internal
-│   ├── conf
-│   │   ├── conf.pb.go
-│   │   └── conf.proto
-│   ├── merchant
-│   │   ├── biz
-│   │   │   ├── businessLine.go
-│   │   │   └── merchant.go
-│   │   ├── data
-│   │   │   ├── businessLine.go
-│   │   │   └── merchant.go
-│   │   └── service
-│   │       ├── businessLine.go
-│   │       ├── merchant.go
-│   │       └── service.go
-│   ├── pkg
-│   │   └── data.go
-│   └── user
-│       ├── biz
-│       │   └── user.go
-│       ├── data
-│       │   └── user.go
-│       └── service
-│           ├── service.go
-│           └── user.go
+│   ├── conf
+│   │   ├── conf.pb.go
+│   │   └── conf.proto
+│   ├── merchant
+│   │   ├── biz
+│   │   │   ├── biz.go
+│   │   │   ├── businessLine.go
+│   │   │   └── merchant.go
+│   │   ├── data
+│   │   │   ├── businessLine.go
+│   │   │   ├── data.go
+│   │   │   └── merchant.go
+│   │   └── service
+│   │       ├── businessLine.go
+│   │       ├── merchant.go
+│   │       └── service.go
+│   ├── pkg
+│   │   ├── data
+│   │   │   └── data.go
+│   │   └── server
+│   │       ├── grpc.go
+│   │       ├── http.go
+│   │       └── server.go
+│   └── user
+│       ├── biz
+│       │   ├── biz.go
+│       │   └── user.go
+│       ├── data
+│       │   ├── data.go
+│       │   └── user.go
+│       └── service
+│           ├── service.go
+│           └── user.go
 ├── openapi.yaml
 └── third_party
     ├── README.md
     ├── errors
-    │   └── errors.proto
+    │   └── errors.proto
     ├── google
-    │   ├── api
-    │   │   ├── annotations.proto
-    │   │   ├── client.proto
-    │   │   ├── field_behavior.proto
-    │   │   ├── http.proto
-    │   │   └── httpbody.proto
-    │   └── protobuf
-    │       └── descriptor.proto
+    │   ├── api
+    │   │   ├── annotations.proto
+    │   │   ├── client.proto
+    │   │   ├── field_behavior.proto
+    │   │   ├── http.proto
+    │   │   └── httpbody.proto
+    │   └── protobuf
+    │       └── descriptor.proto
     └── validate
         ├── README.md
         └── validate.proto
