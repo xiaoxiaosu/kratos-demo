@@ -69,6 +69,7 @@ message GetMerchantRequest {
 
 message merchant {
 	string name = 1;
+	string status = 2;
 }
 
 message GetMerchantReply {
@@ -81,5 +82,5 @@ message ListMerchantRequest {}
 message ListMerchantReply {
 	uint32 code = 1;
 	string message = 2;
-	repeated merchant merchant = 3;
+	repeated merchant data = 3;
 }

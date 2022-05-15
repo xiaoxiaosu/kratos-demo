@@ -4,6 +4,7 @@ import (
 	"context"
 	pb "demo/api/merchant"
 	"demo/internal/merchant/biz"
+	"demo/internal/pkg/middleware/localize"
 	"net/http"
 )
 
@@ -28,10 +29,14 @@ func (m *MerchantService) CreateMerchant(ctx context.Context, in *pb.CreateMerch
 func (m *MerchantService) ListMerchant(ctx context.Context, in *pb.ListMerchantRequest) (*pb.ListMerchantReply, error) {
 	merchants := []*pb.Merchant{}
 
-	merchants = append(merchants, &pb.Merchant{Name: "test1"})
-	merchants = append(merchants, &pb.Merchant{Name: "test2"})
+	merchants = append(merchants, &pb.Merchant{Name: "test1", Status: "blocked"})
+	merchants = append(merchants, &pb.Merchant{Name: "test2", Status: "normal"})
 
-	reply := &pb.ListMerchantReply{Merchant: merchants}
+	for _, v := range merchants {
+		v.Status, _ = localize.Translate(ctx, "merchant_status", v.Status)
+	}
+
+	reply := &pb.ListMerchantReply{Data: merchants}
 
 	return reply, nil
 }

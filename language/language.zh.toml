@@ -1,0 +1,4 @@
+[merchant_status]
+blocked     = "冻结"
+normal      = "正常"
+
